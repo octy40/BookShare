@@ -8,19 +8,52 @@
 
 import UIKit
 
-class BookshelfViewController: UIViewController {
+class BookshelfViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet weak var tableView: UITableView!
+    private var books = [Book]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
 
         // Do any additional setup after loading the view.
+        self.loadBooks()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "BookTableViewCell"
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BookTableViewCell {
+            let book = books[indexPath.row]
+            cell.updateUI(book: book)
+            
+            return cell
+        }else{
+            return UITableViewCell()
+        }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return books.count
+    }
+    
+    //MARK: - Private Methods
+    private func loadBooks(){
+        let book1 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        let book2 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        let book3 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        let book4 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        let book5 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        let book6 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        let book7 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
+        
+        books += [book1, book2, book3, book4, book5, book6, book7]
+    }
+    
+    //TODO: Implement a method that loads books that are in the database for a particular user!
+    
+   
 
     /*
     // MARK: - Navigation
