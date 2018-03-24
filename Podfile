@@ -7,8 +7,11 @@ target 'BookShare' do
 
   # Pods for BookShare
   pod 'Firebase/Core' 
-  pod 'FirebaseUI/Auth'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
-  pod 'FirebaseUI/Google'
+  pod 'GoogleSignIn'
+
+  pod 'SwiftKeychainWrapper'
 
 end

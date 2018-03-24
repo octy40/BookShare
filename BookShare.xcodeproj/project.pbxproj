@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D63D32EE288CADB514ED96C /* Pods_BookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3624DB98A67E865EBD28D182 /* Pods_BookShare.framework */; };
+		7B1FED382066EDAA00D93821 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1FED372066EDAA00D93821 /* DataService.swift */; };
 		7B33754020260FE200C91E5D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B33753F20260FE200C91E5D /* GoogleService-Info.plist */; };
 		7B544FD7201D39D200A14E0D /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B544FD6201D39D200A14E0D /* Book.swift */; };
 		7B544FD9201F4FB600A14E0D /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B544FD8201F4FB600A14E0D /* BookTableViewCell.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		3624DB98A67E865EBD28D182 /* Pods_BookShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44069170894A0F8DA9968AC0 /* Pods-BookShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookShare/Pods-BookShare.release.xcconfig"; sourceTree = "<group>"; };
+		7B1FED372066EDAA00D93821 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		7B33753F20260FE200C91E5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7B544FD6201D39D200A14E0D /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		7B544FD8201F4FB600A14E0D /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
@@ -65,6 +67,14 @@
 				3624DB98A67E865EBD28D182 /* Pods_BookShare.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7B1FED362066ED8300D93821 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7B1FED372066EDAA00D93821 /* DataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		7B4D82B9202347E00087A652 /* Util */ = {
@@ -111,6 +121,7 @@
 		7BC6E2E52016C6130076CCE5 /* BookShare */ = {
 			isa = PBXGroup;
 			children = (
+				7B1FED362066ED8300D93821 /* Services */,
 				7B4D82B9202347E00087A652 /* Util */,
 				7B544FD5201D33D000A14E0D /* Model */,
 				7B544FD4201D33C700A14E0D /* View */,
@@ -128,9 +139,9 @@
 		7BC6E31F201A07090076CCE5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7BC6E2FA201765170076CCE5 /* BookshelfViewController.swift */,
 				7BC6E2E82016C6130076CCE5 /* HomePageViewController.swift */,
 				7BC6E2F82016D2AA0076CCE5 /* LoginViewController.swift */,
-				7BC6E2FA201765170076CCE5 /* BookshelfViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -214,8 +225,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-BookShare/Pods-BookShare-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -237,6 +246,8 @@
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -244,6 +255,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B544FD9201F4FB600A14E0D /* BookTableViewCell.swift in Sources */,
+				7B1FED382066EDAA00D93821 /* DataService.swift in Sources */,
 				7BC6E2FB201765170076CCE5 /* BookshelfViewController.swift in Sources */,
 				7BC6E2F92016D2AA0076CCE5 /* LoginViewController.swift in Sources */,
 				7BC6E2E92016C6130076CCE5 /* HomePageViewController.swift in Sources */,
