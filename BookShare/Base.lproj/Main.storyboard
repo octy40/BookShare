@@ -345,6 +345,7 @@
                         <outlet property="bookNumberOfPages" destination="y7Q-Ze-Hqj" id="11y-oH-7y7"/>
                         <outlet property="bookTitle" destination="Izw-0i-NDA" id="gTl-wb-HbS"/>
                         <outlet property="imageView" destination="oXD-2h-DH0" id="WLS-bM-wi6"/>
+                        <segue destination="8fa-q2-3BC" kind="show" identifier="goToBookShelf" id="eks-2N-apu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UsE-jp-g65" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -358,4 +359,7 @@
         <image name="go-back" width="50" height="50"/>
         <image name="icons8-next-page-filled-50" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="eks-2N-apu"/>
+    </inferredMetricsTieBreakers>
 </document>
