@@ -38,7 +38,12 @@ class Book{
     }
     
     var owner: String{
-        return self._owner
+        get {
+            return self._owner
+        }
+        set(newValue){
+            self._owner = newValue
+        }
     }
     
     var available: Bool{

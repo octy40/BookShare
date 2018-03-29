@@ -63,6 +63,8 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
         // Dispose of any resources that can be recreated.
     }
     
+    // TODO: Implement sign-out
+    
 
     /*
     // MARK: - Navigation

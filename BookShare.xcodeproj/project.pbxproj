@@ -10,8 +10,10 @@
 		6D63D32EE288CADB514ED96C /* Pods_BookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3624DB98A67E865EBD28D182 /* Pods_BookShare.framework */; };
 		7B1FED382066EDAA00D93821 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1FED372066EDAA00D93821 /* DataService.swift */; };
 		7B33754020260FE200C91E5D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B33753F20260FE200C91E5D /* GoogleService-Info.plist */; };
+		7B47C85D2068504600C573C6 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47C85C2068504600C573C6 /* AddBookViewController.swift */; };
 		7B544FD7201D39D200A14E0D /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B544FD6201D39D200A14E0D /* Book.swift */; };
 		7B544FD9201F4FB600A14E0D /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B544FD8201F4FB600A14E0D /* BookTableViewCell.swift */; };
+		7B6CBE32206C6147003AAE47 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6CBE31206C6147003AAE47 /* StorageService.swift */; };
 		7BC6E2E72016C6130076CCE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC6E2E62016C6130076CCE5 /* AppDelegate.swift */; };
 		7BC6E2E92016C6130076CCE5 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC6E2E82016C6130076CCE5 /* HomePageViewController.swift */; };
 		7BC6E2EC2016C6130076CCE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BC6E2EA2016C6130076CCE5 /* Main.storyboard */; };
@@ -26,8 +28,10 @@
 		44069170894A0F8DA9968AC0 /* Pods-BookShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookShare/Pods-BookShare.release.xcconfig"; sourceTree = "<group>"; };
 		7B1FED372066EDAA00D93821 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		7B33753F20260FE200C91E5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7B47C85C2068504600C573C6 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		7B544FD6201D39D200A14E0D /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		7B544FD8201F4FB600A14E0D /* BookTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		7B6CBE31206C6147003AAE47 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		7BC6E2E32016C6130076CCE5 /* BookShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BC6E2E62016C6130076CCE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BC6E2E82016C6130076CCE5 /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				7B1FED372066EDAA00D93821 /* DataService.swift */,
+				7B6CBE31206C6147003AAE47 /* StorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 				7BC6E2FA201765170076CCE5 /* BookshelfViewController.swift */,
 				7BC6E2E82016C6130076CCE5 /* HomePageViewController.swift */,
 				7BC6E2F82016D2AA0076CCE5 /* LoginViewController.swift */,
+				7B47C85C2068504600C573C6 /* AddBookViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -290,11 +296,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B544FD9201F4FB600A14E0D /* BookTableViewCell.swift in Sources */,
+				7B47C85D2068504600C573C6 /* AddBookViewController.swift in Sources */,
 				7B1FED382066EDAA00D93821 /* DataService.swift in Sources */,
 				7BC6E2FB201765170076CCE5 /* BookshelfViewController.swift in Sources */,
 				7BC6E2F92016D2AA0076CCE5 /* LoginViewController.swift in Sources */,
 				7BC6E2E92016C6130076CCE5 /* HomePageViewController.swift in Sources */,
 				7B544FD7201D39D200A14E0D /* Book.swift in Sources */,
+				7B6CBE32206C6147003AAE47 /* StorageService.swift in Sources */,
 				7BC6E2E72016C6130076CCE5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
