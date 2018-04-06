@@ -71,11 +71,45 @@ class AddBookViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func addBookBtnPressed(_ sender: Any) {
         let bookUUID = NSUUID().uuidString
         let uid = Auth.auth().currentUser?.uid
+        var url = ""
         
-        // Save image to Storage
-        saveImageToStorage(bookUUID: bookUUID, image: imageView.image!)
-        // Get imageURL
-        let url = StorageService.ss.generateImageURL(bookUUID: bookUUID)
+        // [START Upload Image]
+        let uploadTask = StorageService.ss.uploadImageToStorage(imageUUID: bookUUID, image: imageView.image!)
+        
+        // Upload failed		
+        uploadTask.observe(.failure) { snapshot in
+            if let error = snapshot.error as? NSError {
+                switch (StorageErrorCode(rawValue: error.code)!) {
+                case .objectNotFound:
+                    print("File doesn't exist with error: \(error)")
+                    break
+                case .unauthorized:
+                    print("User doesn't have permission to access file with error: \(error)")
+                    break
+                case .cancelled:
+                    print("User canceled the upload with error: \(error)")
+                    break
+                case .unknown:
+                    print("Unknown error occurred, inspect the server response with error: \(error)")
+                    break
+                default:
+                    // A separate error occurred. This is a good place to retry the upload.
+                    print("A separate error occurred. Should retry upload. Error value is: \(error)")
+                    break
+                }
+                return
+            }
+        }
+        
+        // Upload success
+        uploadTask.observe(.success) { snapshot in
+            url = StorageService.ss.generateImageURL(bookUUID: bookUUID)
+            print("OCTAVE: url \(url)")
+            
+        }
+        // [END Upload image]
+        
+        
         // Construct userData
         let userData: [String: Any] = ["author":bookAuthor.text!,
                         "available":"yes",
@@ -85,63 +119,15 @@ class AddBookViewController: UIViewController, UIImagePickerControllerDelegate, 
                         "imageURL": url]
         // Create database entry
         DataService.ds.createFirebaseDBBook(bookUUID: bookUUID, userData: userData)
+        
         // Show book added success
         let alertController = UIAlertController(title: "Success", message: "Book was added successfully", preferredStyle: UIAlertControllerStyle.alert)
-
         let action = UIAlertAction.init(title: "Dismiss", style: UIAlertActionStyle.default) { (action) in
             self.performSegue(withIdentifier: "goToBookShelf", sender: nil)
         }
         alertController.addAction(action)
-        
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    // [START save image to storage and get URL]
-    
-    // Get StorageUploadTask object and control upload from this view controller
-    func saveImageToStorage(bookUUID: String, image: UIImage){
-        let uploadTask = StorageService.ss.uploadImageToStorage(imageUUID: bookUUID, image: image)
-        
-        // Listen for state changes, errors, and completion of the upload.
-        uploadTask.observe(.resume) { snapshot in
-            // Upload resumed, also fires when the upload starts
-        }
-        
-        uploadTask.observe(.pause) { snapshot in
-            // Upload paused
-        }
-        
-        uploadTask.observe(.success) { snapshot in
-            // Upload completed successfully
-        }
-        
-        uploadTask.observe(.failure) { snapshot in
-            if let error = snapshot.error as NSError? {
-                switch (StorageErrorCode(rawValue: error.code)!) {
-                case .objectNotFound:
-                    // File doesn't exist
-                    break
-                case .unauthorized:
-                    // User doesn't have permission to access file
-                    break
-                case .cancelled:
-                    // User canceled the upload
-                    break
-                    
-                    /* ... */
-                    
-                case .unknown:
-                    // Unknown error occurred, inspect the server response
-                    break
-                default:
-                    // A separate error occurred. This is a good place to retry the upload.
-                    break
-                }
-            }
-        }
-        
-    }
-    // [END save image to storage and get URL]
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
