@@ -17,14 +17,19 @@ class DataService {
     
     private var _REF_USERS = DB_BASE.child("users")
     private var _REF_BOOKS = DB_BASE.child("books")
+    private var _REF_BOOKS_OWNED = DB_BASE.child("books_owned")
     
+    // [START Getters
     var REF_USERS: DatabaseReference {
         return _REF_USERS
     }
-    
     var REF_BOOKS: DatabaseReference {
         return _REF_BOOKS
     }
+    var REF_BOOKS_OWNED: DatabaseReference {
+        return _REF_BOOKS_OWNED
+    }
+    // [END Getters]
     
     func createFirebaseDBUser(uid: String, userData: Dictionary<String, String>) {
         REF_USERS.child(uid).updateChildValues(userData)
@@ -32,6 +37,11 @@ class DataService {
     
     func createFirebaseDBBook(bookUUID: String, userData: Dictionary<String, Any>){
         REF_BOOKS.child(bookUUID).updateChildValues(userData)
+    }
+    
+    func createFirebaseDBBookRelationship(uid: String, bookUUID: String){
+        let userData: Dictionary<String, String> = [bookUUID:"true"]
+        REF_BOOKS_OWNED.child(uid).updateChildValues(userData)
     }
 
 }
