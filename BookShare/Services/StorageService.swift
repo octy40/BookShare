@@ -37,19 +37,4 @@ class StorageService {
         return uploadTask
     }
     // [END upload image to storage]
-    
-    func generateImageURL(bookUUID: String) -> String {
-        let path = "book_images/" + bookUUID + ".jpg"
-        let imageRef = STORAGE_BASE.child(path)
-        var returnVal = ""
-        imageRef.downloadURL { url, error in
-            if let error = error {
-                print("BookShare: Download error snag \(error)")
-            } else {
-                returnVal = (url?.absoluteString)!
-                print("OCTAVE SCREAMING: \(url)")
-            }
-        }
-        return returnVal
-    }
 }

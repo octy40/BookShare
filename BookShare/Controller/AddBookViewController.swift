@@ -71,12 +71,10 @@ class AddBookViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func addBookBtnPressed(_ sender: Any) {
         let bookUUID = NSUUID().uuidString
         let uid = Auth.auth().currentUser?.uid
-        var url = ""
         
         // [START Upload Image]
         let uploadTask = StorageService.ss.uploadImageToStorage(imageUUID: bookUUID, image: imageView.image!)
-        
-        // Upload failed		
+        // Upload failed
         uploadTask.observe(.failure) { snapshot in
             if let error = snapshot.error as? NSError {
                 switch (StorageErrorCode(rawValue: error.code)!) {
@@ -100,25 +98,32 @@ class AddBookViewController: UIViewController, UIImagePickerControllerDelegate, 
                 return
             }
         }
-        
         // Upload success
         uploadTask.observe(.success) { snapshot in
-            url = StorageService.ss.generateImageURL(bookUUID: bookUUID)
-            print("OCTAVE: url \(url)")
-            
+            // On Success grab image URL from Storage
+            let path = "book_images/" + bookUUID + ".jpg"
+            let imageRef = STORAGE_BASE.child(path)
+            imageRef.downloadURL { url, error in
+                if let error = error {
+                    print("BookShare: Download error snag \(error)")
+                } else {
+                    let userData: [String: Any] = ["imageURL" : url!.absoluteString]
+                    DataService.ds.createFirebaseDBBook(bookUUID: bookUUID, userData: userData)
+                }
+            }
         }
         // [END Upload image]
         
         
-        // Construct userData
+        // [START create book database entry]
         let userData: [String: Any] = ["author":bookAuthor.text!,
                         "available":"yes",
                         "numberOfPages":bookNumberOfPages.text!,
                         "owner":uid!,
-                        "title":bookTitle.text!,
-                        "imageURL": url]
-        // Create database entry
+                        "title":bookTitle.text!]
         DataService.ds.createFirebaseDBBook(bookUUID: bookUUID, userData: userData)
+        DataService.ds.createFirebaseDBBookRelationship(uid: uid!, bookUUID: bookUUID)
+        // [END create book database entry]
         
         // Show book added success
         let alertController = UIAlertController(title: "Success", message: "Book was added successfully", preferredStyle: UIAlertControllerStyle.alert)
