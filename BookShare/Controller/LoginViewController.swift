@@ -46,7 +46,9 @@ class LoginViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDeleg
             } else {
                 print("BookShare: Successfully authenticated with Firebase")
                 if let user = user {
-                    let userData = ["provider": credential.provider]
+                    let userData = ["provider": credential.provider,
+                                    "name":user.displayName!,
+                                    "email":user.email!]
                     self.completeSignIn(id: user.uid, userData: userData)
                     self.performSegue(withIdentifier: "goToHomeView", sender: nil)
                 }
