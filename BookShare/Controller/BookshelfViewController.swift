@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class BookshelfViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -40,6 +41,18 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //MARK: - Private Methods
     private func loadBooks(){
+        // Retrieve data from books_owned
+        let uid = Auth.auth().currentUser?.uid        
+        DataService.ds.REF_BOOKS_OWNED.child(uid!).observe(DataEventType.value) { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    print("SNAP: \(snap.key)")
+                    //snap.key is the bookUUID
+                }
+            }
+        }
+        
+        
         let book1 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
         let book2 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
         let book3 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
