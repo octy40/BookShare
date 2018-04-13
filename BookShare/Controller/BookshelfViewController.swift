@@ -22,6 +22,10 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         self.loadBooks()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "BookTableViewCell"
@@ -46,22 +50,21 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
         DataService.ds.REF_BOOKS_OWNED.child(uid!).observe(DataEventType.value) { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
-                    print("SNAP: \(snap.key)")
                     //snap.key is the bookUUID
+                    DataService.ds.REF_BOOKS.child(snap.key).observe(DataEventType.value, with: { (bookSnapshot) in
+                        let bookDict = bookSnapshot.value as? [String : AnyObject] ?? [:]
+                        let bookData: [String: String] = ["title" : bookDict["title"] as? String ?? "",
+                                                          "author" : bookDict["author"] as? String ?? "",
+                                                          "owner" : (Auth.auth().currentUser?.displayName)!,
+                                                          "numberOfPages" : bookDict["numberOfPages"] as? String ?? "",
+                                                          "availability" : bookDict["available"] as? String ?? "",
+                                                          "imageURL" : bookDict["imageURL"] as? String ?? ""]
+                        
+                        self.books.append(Book(bookData: bookData))
+                    })
                 }
             }
         }
-        
-        
-        let book1 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book2 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book3 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book4 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book5 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book6 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book7 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        
-        books += [book1, book2, book3, book4, book5, book6, book7]
     }
     
     //TODO: Implement a method that loads books that are in the database for a particular user!

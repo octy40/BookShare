@@ -28,11 +28,7 @@ class BookTableViewCell: UITableViewCell {
     func updateUI(book: Book){
         bookTitle.text = book.title
         bookOwner.text = book.owner
-        if(book.available){
-            bookAvailability.text = "Yes"
-        }else{
-            bookAvailability.text = "No"
-        }
+        bookAvailability.text = book.available
         
         //TODO: Configure the book's image
     }
