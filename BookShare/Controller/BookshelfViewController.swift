@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class BookshelfViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     private var books = [Book]()
+    
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +24,20 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         self.loadBooks()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "BookTableViewCell"
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BookTableViewCell {
             let book = books[indexPath.row]
-            cell.updateUI(book: book)
-            
+            if let img = BookshelfViewController.imageCache.object(forKey: book.imageURL as NSString){
+                cell.updateUI(book: book, img: img)
+            } else {
+                cell.updateUI(book: book, img: nil)
+            }
             return cell
         }else{
             return UITableViewCell()
@@ -40,15 +50,27 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //MARK: - Private Methods
     private func loadBooks(){
-        let book1 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book2 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book3 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book4 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book5 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book6 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        let book7 = Book(title: "Fire and Fury: Inside the Trump White House", author: "Michael Wolff", owner: "Bert", available: true)
-        
-        books += [book1, book2, book3, book4, book5, book6, book7]
+        // Retrieve data from books_owned
+        let uid = Auth.auth().currentUser?.uid        
+        DataService.ds.REF_BOOKS_OWNED.child(uid!).observe(DataEventType.value) { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    //snap.key is the bookUUID
+                    DataService.ds.REF_BOOKS.child(snap.key).observe(DataEventType.value, with: { (bookSnapshot) in
+                        let bookDict = bookSnapshot.value as? [String : AnyObject] ?? [:]
+                        let bookData: [String: String] = ["title" : bookDict["title"] as? String ?? "",
+                                                          "author" : bookDict["author"] as? String ?? "",
+                                                          "owner" : (Auth.auth().currentUser?.displayName)!,
+                                                          "numberOfPages" : bookDict["numberOfPages"] as? String ?? "",
+                                                          "availability" : bookDict["available"] as? String ?? "",
+                                                          "imageURL" : bookDict["imageURL"] as? String ?? "",
+                                                          "bookUUID" : snap.key]
+                        
+                        self.books.append(Book(bookData: bookData))
+                    })
+                }
+            }
+        }
     }
     
     //TODO: Implement a method that loads books that are in the database for a particular user!
