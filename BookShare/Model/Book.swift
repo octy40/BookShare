@@ -15,6 +15,7 @@ class Book{
     private var _bookImageURL: String!
     private var _numberOfPages: String!
     private var _availability: String!
+    private var _bookUUID: String!
     
     //TODO: Implement a full constructor
     init(bookData: Dictionary<String, String>){
@@ -24,17 +25,16 @@ class Book{
         self._numberOfPages = bookData["numberOfPages"]
         self._availability = bookData["availability"]
         self._bookImageURL = bookData["imageURL"]
+        self._bookUUID = bookData["bookUUID"]
     }
     
     //MARK: Getters
     var title: String {
             return self._title
     }
-    
     var author: String {
         return self._author
     }
-    
     var owner: String {
         get {
             return self._owner
@@ -43,8 +43,13 @@ class Book{
             self._owner = newValue
         }
     }
-    
     var available: String {
         return self._availability
+    }
+    var bookUUID: String {
+        return self._bookUUID
+    }
+    var imageURL: String {
+        return self._bookImageURL
     }
 }

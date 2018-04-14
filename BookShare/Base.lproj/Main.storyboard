@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -142,7 +141,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2f-fG-uxy">
-                                                    <rect key="frame" x="102" y="11" width="91" height="21"/>
+                                                    <rect key="frame" x="102" y="11" width="297" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -163,7 +162,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coucou" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGD-7B-7XV">
-                                                    <rect key="frame" x="186" y="40" width="60" height="21"/>
+                                                    <rect key="frame" x="186" y="40" width="213" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -176,17 +175,8 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZZ-rH-1d1">
-                                                    <rect key="frame" x="337" y="25" width="50" height="50"/>
-                                                    <state key="normal" image="icons8-next-page-filled-50"/>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="lZZ-rH-1d1" secondAttribute="trailing" constant="12" id="eQ3-Fv-xNi"/>
-                                                <constraint firstItem="lZZ-rH-1d1" firstAttribute="centerY" secondItem="cqD-8Z-vYi" secondAttribute="centerY" id="eUt-y9-Jav"/>
-                                                <constraint firstItem="lZZ-rH-1d1" firstAttribute="centerY" secondItem="cqD-8Z-vYi" secondAttribute="centerY" id="jqM-5f-IBx"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bookAvailability" destination="fDv-xX-qgI" id="laZ-vR-NMc"/>
@@ -357,9 +347,9 @@
         <image name="add-button-thin-line-ios-7-interface-symbol_318-36219" width="626" height="626"/>
         <image name="book_share_logo" width="200" height="200"/>
         <image name="go-back" width="50" height="50"/>
-        <image name="icons8-next-page-filled-50" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="UQo-T1-csv"/>
         <segue reference="eks-2N-apu"/>
     </inferredMetricsTieBreakers>
 </document>

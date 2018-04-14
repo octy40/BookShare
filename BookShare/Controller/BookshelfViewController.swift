@@ -12,6 +12,8 @@ import Firebase
 class BookshelfViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     private var books = [Book]()
+    
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,11 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
         let cellIdentifier = "BookTableViewCell"
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? BookTableViewCell {
             let book = books[indexPath.row]
-            cell.updateUI(book: book)
-            
+            if let img = BookshelfViewController.imageCache.object(forKey: book.imageURL as NSString){
+                cell.updateUI(book: book, img: img)
+            } else {
+                cell.updateUI(book: book, img: nil)
+            }
             return cell
         }else{
             return UITableViewCell()
@@ -58,7 +63,8 @@ class BookshelfViewController: UIViewController, UITableViewDelegate, UITableVie
                                                           "owner" : (Auth.auth().currentUser?.displayName)!,
                                                           "numberOfPages" : bookDict["numberOfPages"] as? String ?? "",
                                                           "availability" : bookDict["available"] as? String ?? "",
-                                                          "imageURL" : bookDict["imageURL"] as? String ?? ""]
+                                                          "imageURL" : bookDict["imageURL"] as? String ?? "",
+                                                          "bookUUID" : snap.key]
                         
                         self.books.append(Book(bookData: bookData))
                     })

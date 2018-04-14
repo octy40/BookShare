@@ -22,7 +22,7 @@ class StorageService {
     func uploadImageToStorage(imageUUID: String, image: UIImage) -> StorageUploadTask {
         // Convert image to jpg
         var data = Data()
-        data = UIImageJPEGRepresentation(image, 0.8)!
+        data = UIImageJPEGRepresentation(image, 0.0)!
         
         // Create storage reference to image to upload
         let imageRef = REF_IMAGES.child(imageUUID + ".jpg")
