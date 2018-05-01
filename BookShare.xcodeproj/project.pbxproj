@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6D63D32EE288CADB514ED96C /* Pods_BookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3624DB98A67E865EBD28D182 /* Pods_BookShare.framework */; };
+		7B13ED8E20857661001B00C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B13ED8D20857661001B00C4 /* Constants.swift */; };
 		7B1FED382066EDAA00D93821 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1FED372066EDAA00D93821 /* DataService.swift */; };
 		7B33754020260FE200C91E5D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B33753F20260FE200C91E5D /* GoogleService-Info.plist */; };
 		7B47C85D2068504600C573C6 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B47C85C2068504600C573C6 /* AddBookViewController.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		3624DB98A67E865EBD28D182 /* Pods_BookShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44069170894A0F8DA9968AC0 /* Pods-BookShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookShare.release.xcconfig"; path = "Pods/Target Support Files/Pods-BookShare/Pods-BookShare.release.xcconfig"; sourceTree = "<group>"; };
+		7B13ED8D20857661001B00C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7B1FED372066EDAA00D93821 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		7B33753F20260FE200C91E5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7B47C85C2068504600C573C6 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 		7B4D82B9202347E00087A652 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				7B13ED8D20857661001B00C4 /* Constants.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				7B1FED382066EDAA00D93821 /* DataService.swift in Sources */,
 				7BC6E2FB201765170076CCE5 /* BookshelfViewController.swift in Sources */,
 				7BC6E2F92016D2AA0076CCE5 /* LoginViewController.swift in Sources */,
+				7B13ED8E20857661001B00C4 /* Constants.swift in Sources */,
 				7BC6E2E92016C6130076CCE5 /* HomePageViewController.swift in Sources */,
 				7B544FD7201D39D200A14E0D /* Book.swift in Sources */,
 				7B6CBE32206C6147003AAE47 /* StorageService.swift in Sources */,
